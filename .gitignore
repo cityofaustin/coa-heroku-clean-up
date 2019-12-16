@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+### coa stuff
+.env
+zappa_settings.json
