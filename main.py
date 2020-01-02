@@ -47,7 +47,6 @@ def hello_world():
 # Define a handler for the "pull_request" event
 @webhook.hook(event_type='pull_request')
 def on_pull_request(data):
-    print(json.dumps(data))
     action = data["action"]
     branch = data["pull_request"]["head"]["ref"]
 
