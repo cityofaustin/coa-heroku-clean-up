@@ -10,7 +10,11 @@ zappa_settings = {
     "environment_variables": {
       "GITHUB_WEBHOOK_SECRET_TOKEN": os.getenv("GITHUB_WEBHOOK_SECRET_TOKEN"),
       "HEROKU_KEY": os.getenv("HEROKU_KEY"),
-    }
+    },
+    "events": [{
+        "function": "main.joplin_cron_clean_up",
+        "expression": "cron(0 0 * * ? *)"
+    }]
   }
 }
 
