@@ -131,3 +131,5 @@ dmypy.json
 ### coa stuff
 .env
 zappa_settings.json
+local/
+.idea/

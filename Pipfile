@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-zappa = "*"
+zappa = "==0.48.2"
 
 [packages]
 github-webhook = "*"
