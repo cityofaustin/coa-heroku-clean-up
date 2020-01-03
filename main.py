@@ -33,7 +33,7 @@ def clean_up_app(app_name):
         return
     config = heroku_app.config()
     if not config["DELETION_PROTECTION"]:
-        print(f"Starting to deleting app {app_name}")
+        print(f"Starting to delete app {app_name}")
         heroku_app.delete()
         print(f"Successfully deleted app {app_name}")
     else:
