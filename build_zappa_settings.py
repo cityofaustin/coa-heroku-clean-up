@@ -14,7 +14,8 @@ zappa_settings = {
     "events": [{
         "function": "main.joplin_cron_clean_up",
         "expression": "cron(0 0 * * ? *)"
-    }]
+    }],
+    "keep_warm": False,
   }
 }
 
