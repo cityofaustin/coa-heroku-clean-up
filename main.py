@@ -26,7 +26,7 @@ def get_heroku_app_name(branch):
     return re.sub(r'-*$','', f'joplin-pr-{branch}'[0:30]).lower()
 
 def has_deletion_protection(app):
-    val = app.config()["DELETION_PROTECTION"])
+    val = app.config()["DELETION_PROTECTION"]
     # If val is "None", return False
     if not val:
         return False
