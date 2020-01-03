@@ -1,6 +1,7 @@
 from github_webhook import Webhook
 from flask import Flask, jsonify
 import os, json, re, requests
+from distutils.util import strtobool
 import heroku3
 import traceback
 
@@ -24,6 +25,14 @@ app.register_error_handler(500, handle_internal_server_error)
 def get_heroku_app_name(branch):
     return re.sub(r'-*$','', f'joplin-pr-{branch}'[0:30]).lower()
 
+def has_deletion_protection(app):
+    val = app.config()["DELETION_PROTECTION"])
+    # If val is "None", return False
+    if not val:
+        return False
+    else:
+        return strtobool(val)
+
 # Deletes a Heroku PR build if DELETION_PROTECTION is not enabled
 def clean_up_app(app_name):
     try:
@@ -31,8 +40,7 @@ def clean_up_app(app_name):
     except KeyError:
         print(f"App {app_name} has not been built yet")
         return
-    config = heroku_app.config()
-    if not config["DELETION_PROTECTION"]:
+    if not has_deletion_protection(heroku_app):
         print(f"Starting to delete app {app_name}")
         heroku_app.delete()
         print(f"Successfully deleted app {app_name}")
@@ -74,7 +82,7 @@ def joplin_cron_clean_up():
     for app in joplin_pr_apps:
         if (
             (app.name not in pull_request_app_names) and
-            (not app.config()["DELETION_PROTECTION"])
+            (not has_deletion_protection(app))
         ):
             clean_up_app(app.name)
 
