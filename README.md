@@ -11,7 +11,7 @@ This lambda also runs a scheduled "joplin_cron_clean_up" job every day at midnig
 To redeploy this lambda function:
 1. Make sure you've got a valid GITHUB_WEBHOOK_SECRET_TOKEN and HEROKU_KEY in your .env file.
 2. Install dependencies `pipenv install`
-3. Run `sh ./.circleci/cleanup/deploy.sh`
+3. Run `sh deploy.sh`
 
 ## Integrate with github
 

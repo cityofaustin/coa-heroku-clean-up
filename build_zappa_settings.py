@@ -11,10 +11,22 @@ zappa_settings = {
       "GITHUB_WEBHOOK_SECRET_TOKEN": os.getenv("GITHUB_WEBHOOK_SECRET_TOKEN"),
       "HEROKU_KEY": os.getenv("HEROKU_KEY"),
     },
-    "events": [{
-        "function": "main.joplin_cron_clean_up",
-        "expression": "cron(0 0 * * ? *)"
-    }],
+    "events": [
+        {
+            "function": "main.joplin_cron_clean_up",
+            "expression": "cron(0 0 * * ? *)"
+        },
+        # Restart First Production dyno every day midnight (5AM UTC)
+        {
+            "function": "main.joplin_restart_production_dyno_1",
+            "expression":  "cron(0 5 * * ? *)"
+        },
+        # TODO: when/if we have a second dyno, run a function to restart that a half hour later.
+        # {
+        #     "function": "main.joplin_restart_production_dyno_2",
+        #     "expression":  "cron(30 5 * * ? *)"
+        # }
+    ],
     "keep_warm": False,
   }
 }
