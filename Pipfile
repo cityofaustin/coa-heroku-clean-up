@@ -7,9 +7,9 @@ verify_ssl = true
 zappa = "==0.48.2"
 
 [packages]
-github-webhook = "*"
-flask = "*"
-heroku3 = "*"
+github-webhook = "==1.0.3"
+flask = "==1.1.1"
+heroku3 = "==3.4.0"
 
 [requires]
 python_version = "3.7"

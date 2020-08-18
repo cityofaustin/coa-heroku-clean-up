@@ -107,6 +107,20 @@ def joplin_restart_production_dyno_1():
 #     dyno2 = production_app.dynos()[1]
 #     dyno2.restart()
 
+
+def send_translation_report():
+    '''
+    Runs the send_translation_report command.
+    We can't set cron jobs within our Heroku dynos, so we're going to use this lambda function
+    to schedule when we want to send the report.
+    Schedule is set within build_zappa_settings.py.
+    '''
+    print("Running translation report")
+    pr_app = heroku_conn.app("joplin")
+    output = pr_app.run_command('python joplin/manage.py send_translation_report', attach=False, printout=True)
+    print(output)
+
+
 # Only needed for local development
 # Zappa handles the "app" object directly
 if __name__ == '__main__':

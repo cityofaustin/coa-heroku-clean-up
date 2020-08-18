@@ -25,7 +25,12 @@ zappa_settings = {
         # {
         #     "function": "main.joplin_restart_production_dyno_2",
         #     "expression":  "cron(30 5 * * ? *)"
-        # }
+        # },
+        {
+            # Send translation report every Monday and Wednesday at 6AM CT (11AM UTC)
+            "function": "main.send_translation_report",
+            "expression":  "cron(0 11 ? * MON,WED *)"
+        },
     ],
     "keep_warm": False,
   }
