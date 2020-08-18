@@ -115,8 +115,8 @@ def send_translation_report():
     to schedule when we want to send the report.
     Schedule is set within build_zappa_settings.py.
     '''
-    # TODO: change to production once testing is done
-    pr_app = heroku_conn.app("joplin-pr-4695-email")
+    print("Running translation report")
+    pr_app = heroku_conn.app("joplin")
     output = pr_app.run_command('python joplin/manage.py send_translation_report', attach=False, printout=True)
     print(output)
 
