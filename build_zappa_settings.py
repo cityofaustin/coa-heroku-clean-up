@@ -12,9 +12,10 @@ zappa_settings = {
       "HEROKU_KEY": os.getenv("HEROKU_KEY"),
     },
     "events": [
+        # Clean up Joplin PR builds that don't have an open PR. (Runs every day at midnight)
         {
             "function": "main.joplin_cron_clean_up",
-            "expression": "cron(0 0 * * ? *)"
+            "expression": "cron(0 5 * * ? *)"
         },
         # Restart First Production dyno every day midnight (5AM UTC)
         {
