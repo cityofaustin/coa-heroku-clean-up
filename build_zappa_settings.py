@@ -12,13 +12,13 @@ zappa_settings = {
       "HEROKU_KEY": os.getenv("HEROKU_KEY"),
     },
     "events": [
-        # Clean up Joplin PR builds that don't have an open PR. (Runs every day at midnight)
         {
+            # Clean up Joplin PR builds that don't have an open PR. (Runs every day at midnight)
             "function": "main.joplin_cron_clean_up",
             "expression": "cron(0 5 * * ? *)"
         },
-        # Restart First Production dyno every day midnight (5AM UTC)
         {
+            # Restart First Production dyno every day midnight (5AM UTC)
             "function": "main.joplin_restart_production_dyno_1",
             "expression":  "cron(0 5 * * ? *)"
         },
@@ -32,6 +32,11 @@ zappa_settings = {
             "function": "main.send_translation_report",
             "expression":  "cron(0 11 ? * MON,WED *)"
         },
+        {
+            # run extract script every saturday at 6AM CT (11AM UTC)
+            "function": "main.extract_pdf_text",
+            "expression": "cron(0 11 ? * SAT *)"
+        }
     ],
     "keep_warm": False,
   }

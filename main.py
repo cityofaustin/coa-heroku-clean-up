@@ -121,6 +121,18 @@ def send_translation_report():
     print(output)
 
 
+def extract_pdf_text():
+    """
+    Runs the extract text from pdf command
+    (joplin/pages/official_documents_page/management/commands/extract_document_text.py)
+    Schedule is set within build_zappa_settings.py
+    """
+    print("Extracting pdf text...")
+    prod_app = heroku_conn.app("joplin")
+    output = prod_app.run_command('python joplin/manage.py extract_document_text', attach=False, printout=True)
+    print(output)
+
+
 # Only needed for local development
 # Zappa handles the "app" object directly
 if __name__ == '__main__':
